@@ -8,6 +8,8 @@ set incsearch
 nnoremap <C-n> :NERDTreeToggle<CR>
 nnoremap <silent> <F8> :TagbarToggle<CR>
 nnoremap <F5> :UndotreeToggle<CR>
+xmap ga <Plug>(EasyAlign)
+nmap ga <Plug>(EasyAlign)
 
 let g:pymode=1
 let g:airline_theme='base16_gruvbox_dark_hard'
@@ -55,6 +57,7 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+Plug 'junegunn/vim-easy-align'
 
 " General
 Plug 'tpope/vim-sensible'
