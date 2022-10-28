@@ -3,7 +3,6 @@ set mouse=a
 set colorcolumn=80
 set termguicolors
 set signcolumn=yes
-set foldmethod=syntax
 set incsearch
 
 nnoremap <C-n> :NERDTreeToggle<CR>
