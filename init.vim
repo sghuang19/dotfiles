@@ -25,7 +25,6 @@ call plug#begin()
 Plug 'junegunn/vim-plug'
 
 " Better visual
-" Plug 'karb94/neoscroll.nvim'
 Plug 'psliwka/vim-smoothie'
 Plug 'nvim-lua/plenary.nvim'
 Plug 'flazz/vim-colorschemes'
@@ -46,7 +45,6 @@ Plug 'github/copilot.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-" Plug 'numirias/semshi'
 Plug 'godlygeek/tabular'
 Plug 'preservim/vim-markdown'
 
@@ -67,7 +65,6 @@ Plug 'christoomey/vim-tmux-navigator'
 call plug#end()
 
 colorscheme gruvbox
-" lua require('neoscroll').setup({easing_function = "quadratic"})
 lua require("todo-comments").setup()
 
 source ~/.config/nvim/coc.vim
