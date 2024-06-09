@@ -15,6 +15,7 @@ let g:airline_theme='base16_gruvbox_dark_hard'
 let g:gitgutter_highlight_linenrs=1
 let g:gitgutter_set_sign_background=1
 highlight! link SignColumn LineNr
+let g:vim_markdown_math = 1
 
 call plug#begin()
 "   - Neovim (Linux/macOS/Windows): stdpath('data') . '/plugged'
@@ -44,7 +45,8 @@ Plug 'github/copilot.vim'
 Plug 'ludovicchabant/vim-gutentags'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'python-mode/python-mode', { 'for': 'python', 'branch': 'develop' }
-" Plug 'numirias/semshi'
+Plug 'godlygeek/tabular'
+Plug 'preservim/vim-markdown'
 
 " Editing tools
 Plug 'mbbill/undotree'
@@ -52,6 +54,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
 
 " General
 Plug 'tpope/vim-sensible'

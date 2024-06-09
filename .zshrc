@@ -1,14 +1,6 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of
-# ~/.zshrc. Initialization code that may require console input (password
-# prompts, [y/n] confirmations, etc.) must go above this block; everything else
-# may go below.
-p10k="${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-if [ -r "$p10k" ]; then source "$p10k"; fi
-
+# omz configurations
 export ZSH=$HOME/.oh-my-zsh
-#
-# ZSH_THEME="robbyrussell"
-ZSH_THEME="powerlevel10k/powerlevel10k"
+ZSH_THEME="robbyrussell"
 
 # Uncomment the following line to use case-sensitive completion.
 # CASE_SENSITIVE="true"
@@ -17,10 +9,7 @@ ZSH_THEME="powerlevel10k/powerlevel10k"
 # Case-sensitive completion must be off. _ and - will be interchangeable.
 # HYPHEN_INSENSITIVE="true"
 
-# zstyle ':omz:update' mode disabled  # disable automatic updates
-# zstyle ':omz:update' mode auto      # update automatically without asking
-zstyle ':omz:update' mode reminder  # just remind me to update when it's time
-
+zstyle ':omz:update' mode auto      # update automatically without asking
 zstyle ':omz:update' frequency 13
 
 # Uncomment the following line if pasting URLs and other text is messed up.
@@ -54,6 +43,7 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(\
     git tmux python vi-mode history colorize colored-man-pages
     zsh-autosuggestions zsh-syntax-highlighting
+    1password zsh-navigation-tools
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -61,8 +51,14 @@ source $ZSH/oh-my-zsh.sh
 # User configuration
 export PATH="/opt/homebrew/opt/ruby/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-# export MANPATH="/usr/local/man:$MANPATH"
+export PATH="$HOME/.local/bin:$PATH"  # pipx managed
 export LESS="-R --mouse"
+# Powerline configuration
+export PIPX_LOCAL_VENVS="$(pipx environment | grep PIPX_LOCAL_VENVS | cut -d '=' -f 2)"
+export POWERLINE_ROOT="$PIPX_LOCAL_VENVS/powerline-status/lib/python3.12/site-packages"
+. $POWERLINE_ROOT/powerline/bindings/zsh/powerline.zsh
+# Aliases
+alias vi="nvim"
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
@@ -77,22 +73,5 @@ fi
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
-
-# >>> conda initialize >>>
-__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
-if [ $? -eq 0 ]; then
-    eval "$__conda_setup"
-else
-    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
-        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
-    else
-        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
-    fi
-fi
-unset __conda_setup
-# <<< conda initialize <<<
-
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
