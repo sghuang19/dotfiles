@@ -54,7 +54,9 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-unimpaired'
-Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install' }
+Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && npx --yes yarn install' }
+Plug 'prettier/vim-prettier', { 'do': 'yarn install --frozen-lockfile --production' }
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 
 " General
 Plug 'tpope/vim-sensible'
@@ -66,6 +68,7 @@ call plug#end()
 colorscheme gruvbox
 " lua require('neoscroll').setup({easing_function = "quadratic"})
 lua require("todo-comments").setup()
+lua require'nvim-treesitter.configs'.setup{highlight={enable=true}}
 
 source ~/.config/nvim/coc.vim
 
