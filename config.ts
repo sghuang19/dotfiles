@@ -1,9 +1,11 @@
-/** Continue config */
+/* Continue config */
 
-/** Fetch Secrets */
+// cSpell:words siliconflow deepseek qwen rerank reranker baai bgem
+
+/* Fetch Secrets */
 
 // @ts-ignore - can't find type definitions here
-import { execSync } from "child_process";
+import { execSync } from "node:child_process";
 
 const runShellCommand = (command: string): string => {
   try {
@@ -15,19 +17,18 @@ const runShellCommand = (command: string): string => {
 };
 
 const siliconFlowKey = runShellCommand(
-  "op read op://dev/silicon-flow/continue"
+  "op read op://dev/silicon-flow/continue",
 );
 const voyageKey = runShellCommand("op read 'op://dev/voyage-ai/credential'");
 const anthropicKey = runShellCommand("op read 'op://dev/anthropic/continue'");
+const openAIKey = runShellCommand("op read 'op://dev/openai/continue'");
 
-/** Model Definitions */
+/* Model Definitions */
 
-const promptCode =
+const prompt =
   "You are an expert software developer. You give helpful and concise responses.";
 
-const promptChat = "You are a helpful assistant.";
-
-/** Chat Models */
+/* Chat Models */
 
 const SiliconFlow: Partial<ModelDescription> & { provider: string } = {
   provider: "siliconflow",
@@ -38,40 +39,28 @@ const DSV3: ModelDescription = {
   ...SiliconFlow,
   title: "DeepSeek V3",
   model: "deepseek-ai/DeepSeek-V3",
-  systemMessage: promptCode,
+  systemMessage: prompt,
 };
 
 const DSV3Pro: ModelDescription = {
   ...SiliconFlow,
   title: "DeepSeek V3 - Pro",
   model: "Pro/deepseek-ai/DeepSeek-V3",
-  systemMessage: promptCode,
-};
-
-const DSV3Chat: ModelDescription = {
-  ...DSV3,
-  title: "DeepSeek V3 - Chat",
-  systemMessage: promptChat,
+  systemMessage: prompt,
 };
 
 const DSR1: ModelDescription = {
   ...SiliconFlow,
   title: "DeepSeek R1",
   model: "deepseek-ai/DeepSeek-R1",
-  systemMessage: promptCode,
+  systemMessage: prompt,
 };
 
 const DSR1Pro: ModelDescription = {
   ...SiliconFlow,
   title: "DeepSeek R1 - Pro",
   model: "Pro/deepseek-ai/DeepSeek-R1",
-  systemMessage: promptCode,
-};
-
-const DSR1Chat: ModelDescription = {
-  ...DSR1,
-  title: "DeepSeek R1 - Chat",
-  systemMessage: promptChat,
+  systemMessage: prompt,
 };
 
 const DSV25: ModelDescription = {
@@ -80,16 +69,29 @@ const DSV25: ModelDescription = {
   model: "deepseek-ai/DeepSeek-V2.5",
 };
 
-const ClaudeSonnet: ModelDescription = {
-  title: "Claude 3.5 Sonnet",
+const Qwen25: ModelDescription = {
+  ...SiliconFlow,
+  title: "Qwen 2.5 Coder",
+  model: "Qwen/Qwen2.5-Coder-32B-Instruct",
+};
+
+const Sonnet: ModelDescription = {
+  title: "Claude 3.7 Sonnet",
   provider: "anthropic",
-  model: "claude-3-5-sonnet-latest",
+  model: "claude-3-7-sonnet-latest",
   apiKey: anthropicKey,
-  systemMessage: promptCode,
+  systemMessage: prompt,
   cacheBehavior: {
     cacheSystemMessage: true,
     cacheConversation: true,
   },
+};
+
+const GPT4o: ModelDescription = {
+  title: "GPT-4o",
+  provider: "openai",
+  model: "gpt-4o",
+  apiKey: openAIKey,
 };
 
 /** Embeddings Provider */
@@ -108,7 +110,7 @@ const VoyageCode3: EmbeddingsProviderDescription = {
 /** Reranker */
 
 const BGERerankerV2M3: RerankerDescription = {
-  name: "bge",
+  name: "siliconflow",
   params: {
     model: "BAAI/reranker-v2-m3",
     apiKey: siliconFlowKey,
@@ -124,10 +126,10 @@ const VoyageRerank2: RerankerDescription = {
 };
 
 export function modifyConfig(config: Config): Config {
-  [DSV3, DSR1, ClaudeSonnet, DSV3Chat, DSR1Chat].forEach((model) =>
-    config.models.push(model)
+  [DSV3, DSR1, DSV3Pro, DSR1Pro, Sonnet, GPT4o].forEach((model) =>
+    config.models.push(model),
   );
-  config.tabAutocompleteModel = DSV25;
+  config.tabAutocompleteModel = Qwen25;
   config.embeddingsProvider = BGEM3;
   config.reranker = VoyageRerank2;
   return config;
