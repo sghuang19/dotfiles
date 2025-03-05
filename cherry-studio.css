@@ -2,6 +2,8 @@
 
 :root {
   --color-black-soft: #4c5844;
+  --color-white-soft: #bdd0b0;
+  font-family: "MonoLisa Variable" !important;
 }
 
 body[theme-mode="dark"] {
@@ -16,6 +18,7 @@ body[theme-mode="dark"] {
     #3d4637 0%,
     #485241 100%
   );
+  --chat-text-user: --color-white-soft;
 
   #content-container {
     background: linear-gradient(135deg, #5f6b57 0%, #6a7861 100%) !important;
@@ -41,17 +44,8 @@ body[theme-mode="light"] {
   }
 }
 
+// make the input text area higher
 #inputbar textarea.ant-input {
   height: 120px !important;
   padding: 10px;
-}
-
-body {
-  --file-line-width: 65rem;
-  --font-default: "LXGW WenKai Screen", "Microsoft YaHei", "sans-serif";
-}
-
-/* reduce margin to the right of editor mode */
-.markdown-source-view.mod-cm6.is-readable-line-width .cm-content {
-  max-width: 100%;
 }
