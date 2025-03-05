@@ -14,13 +14,12 @@ return {
 	opts = {
 		formatters_by_ft = {
 			lua = { "stylua" },
-			markdown = { "markdownlint-cli2", "prettier" },
-			-- python = { "black" },
-			-- ["*"] = { "codespell" },
-			["_"] = { "prettier" },
+			markdown = { "markdownlint-cli2", "prettierd" },
+			python = { "ruff" },
+			["_"] = { "prettierd" },
 		},
 		format_options = {
-			async = false,
+			async = true,
 			lsp_fallback = true,
 		},
 	},

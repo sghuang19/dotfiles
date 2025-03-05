@@ -1,27 +1,48 @@
 return {
-	"williamboman/mason.nvim",
-	dependencies = {
-		"williamboman/mason-lspconfig.nvim",
-		"neovim/nvim-lspconfig",
+	{
+		"williamboman/mason.nvim",
+		dependencies = { "neovim/nvim-lspconfig" },
+		config = function()
+			require("mason").setup()
+		end,
 	},
-	config = function()
-		require("mason").setup()
-		require("mason-lspconfig").setup({
+	{
+		"williamboman/mason-lspconfig.nvim",
+		dependencies = { "williamboman/mason.nvim" },
+		config = function()
+			require("mason-lspconfig").setup({
+				ensure_installed = {
+					"cssls",
+					"html",
+					"jsonls",
+					"lua_ls",
+					"ruff",
+					"ts_ls",
+					"unocss",
+					"volar",
+				},
+			})
+			require("mason-lspconfig").setup_handlers({
+				function(server)
+					require("lspconfig")[server].setup({})
+				end,
+			})
+		end,
+	},
+	{
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
+		dependencies = { "williamboman/mason.nvim" },
+		opts = {
 			ensure_installed = {
-				"lua_ls",
-				"pyright",
-				"ts_ls",
-				"html",
-				"cssls",
-				"jsonls",
-				"unocss",
+				--Linters
+				"markdownlint-cli2",
+				"stylua",
+				--Formatters
+				"prettier",
+				"prettierd",
+				"shfmt",
 			},
-			automatic_installation = true,
-		})
-		require("mason-lspconfig").setup_handlers({
-			function(server)
-				require("lspconfig")[server].setup({})
-			end,
-		})
-	end,
+			auto_update = true,
+		},
+	},
 }
