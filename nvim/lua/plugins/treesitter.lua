@@ -2,21 +2,21 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpadte",
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				auto_install = true,
-				highlight = { enable = true },
-				incremental_selection = {
-					enable = true,
-					keymaps = {
-						init_selection = "gnn",
-						node_incremental = "grn",
-						scope_incremental = "grc",
-						node_decremental = "grm",
-					},
+		opts = {
+			auto_install = true,
+			highlight = { enable = true },
+			incremental_selection = {
+				enable = true,
+				keymaps = {
+					init_selection = "gnn",
+					node_incremental = "grn",
+					scope_incremental = "grc",
+					node_decremental = "grm",
 				},
-				indent = { enable = true },
-			})
+			},
+			indent = { enable = true },
+		},
+		init = function()
 			vim.wo.foldmethod = "expr"
 			vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 		end,
