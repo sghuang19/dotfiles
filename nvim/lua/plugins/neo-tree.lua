@@ -5,8 +5,11 @@ return {
 		"nvim-tree/nvim-web-devicons",
 		"MunifTanjim/nui.nvim",
 		-- requires imagemagick, ueberzugpp and config, and tmux config
-		{ "3rd/image.nvim", build = false, opts = {} },
+		-- { "3rd/image.nvim", build = false, opts = {} },
 	},
+	-- load lazily if no directory is opened
+	lazy = vim.fn.argc() == 0 or vim.fn.filereadable(vim.fn.argv(0)) == 1,
+	cmd = "Neotree",
 	opts = {
 		window = {
 			width = 25,

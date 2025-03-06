@@ -2,6 +2,7 @@ return {
 	{
 		"williamboman/mason.nvim",
 		dependencies = { "neovim/nvim-lspconfig" },
+		event = "VeryLazy",
 		config = function()
 			require("mason").setup()
 		end,

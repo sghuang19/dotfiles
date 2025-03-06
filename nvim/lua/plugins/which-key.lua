@@ -1,7 +1,7 @@
 return {
 	"folke/which-key.nvim",
 	dependencies = "nvim-tree/nvim-web-devicons",
-	event = "VeryLazy",
+	event = "VeryLazy", -- we still need the help to popup
 	keys = {
 		{
 			"<leader>?",

@@ -2,6 +2,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpadte",
+		event = "VeryLazy",
 		opts = {
 			auto_install = true,
 			highlight = { enable = true },
@@ -16,7 +17,8 @@ return {
 			},
 			indent = { enable = true },
 		},
-		init = function()
+		config = function(_, opts)
+			require("nvim-treesitter").setup(opts)
 			vim.wo.foldmethod = "expr"
 			vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 		end,
@@ -24,6 +26,7 @@ return {
 	{ "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
 	{
 		"nvim-treesitter/nvim-treesitter-refactor",
+		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				refactor = {
@@ -50,6 +53,7 @@ return {
 	},
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
+		dependencies = "nvim-treesitter/nvim-treesitter",
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				textobjects = {
