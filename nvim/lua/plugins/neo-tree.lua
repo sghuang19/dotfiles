@@ -4,7 +4,17 @@ return {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons",
 		"MunifTanjim/nui.nvim",
-		"3rd/image.nvim",
+		-- requires imagemagick, ueberzugpp and config, and tmux config
+		{ "3rd/image.nvim", build = false, opts = {} },
 	},
-	opts = { window = { width = 25 } },
+	opts = {
+		window = {
+			width = 25,
+			mappings = {
+				["P"] = { "toggle_preview", config = {
+					use_image_nvim = true,
+				} },
+			},
+		},
+	},
 }
