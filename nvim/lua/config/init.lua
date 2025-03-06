@@ -18,7 +18,6 @@ end
 -- Key mappings
 local keymaps = {
 	-- mode, key, command, options
-	{ "n", "<C-n>", ":NERDTreeToggle<CR>", { noremap = true } },
 	{ "n", "<F8>", ":TagbarToggle<CR>", { noremap = true, silent = true } },
 	{ "n", "<F5>", ":UndotreeToggle<CR>", { noremap = true } },
 }
@@ -27,7 +26,6 @@ for _, map in ipairs(keymaps) do
 end
 
 -- Plugin-specific settings
-vim.g.pymode = 1
 vim.g.gitgutter_highlight_linenrs = 1
 vim.g.gitgutter_set_sign_background = 1
 vim.g.vim_markdown_math = 1

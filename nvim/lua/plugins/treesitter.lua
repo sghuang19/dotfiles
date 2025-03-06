@@ -6,6 +6,7 @@ return {
 		opts = {
 			auto_install = true,
 			highlight = { enable = true },
+			indent = { enable = true },
 			incremental_selection = {
 				enable = true,
 				keymaps = {
@@ -15,7 +16,6 @@ return {
 					node_decremental = "grm",
 				},
 			},
-			indent = { enable = true },
 		},
 		config = function(_, opts)
 			require("nvim-treesitter").setup(opts)

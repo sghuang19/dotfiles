@@ -1,4 +1,10 @@
 return {
+	{
+		"akinsho/toggleterm.nvim",
+		opts = {
+			-- open_mapping = [[<c-\>]],
+		},
+	},
 	{ "sitiom/nvim-numbertoggle" },
 	{
 		"karb94/neoscroll.nvim",
@@ -62,16 +68,8 @@ return {
 		build = function()
 			vim.fn["mkdp#util#install"]()
 		end,
-	},
-	{
-		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdate",
 		config = function()
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = { "lua", "vim", "vimdoc", "query", "python", "javascript" },
-				highlight = { enable = true },
-				indent = { enable = true },
-			})
+			vim.g.vim_markdown_math = 1
 		end,
 	},
 
