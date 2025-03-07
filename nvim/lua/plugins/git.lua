@@ -1,6 +1,12 @@
 return {
 	{ "tpope/vim-fugitive", event = "VeryLazy" },
-	{ "airblade/vim-gitgutter", event = { "BufRead", "BufNewFile" } },
+	{
+		"airblade/vim-gitgutter",
+		event = { "BufRead", "BufNewFile" },
+		config = function()
+			vim.cmd("GitGutterLineNrHighlightsEnable")
+		end,
+	},
 	{
 		"kdheepak/lazygit.nvim",
 		cmd = {

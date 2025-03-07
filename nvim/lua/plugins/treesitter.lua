@@ -1,8 +1,9 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpadte",
-		event = "VeryLazy",
+		version = "*",
+		build = "<cmd>TSUpadte<cr>",
+		event = { "BufRead", "BufNewFile" },
 		opts = {
 			auto_install = true,
 			highlight = { enable = true },
@@ -17,16 +18,12 @@ return {
 				},
 			},
 		},
-		config = function(_, opts)
-			require("nvim-treesitter").setup(opts)
-			vim.wo.foldmethod = "expr"
-			vim.wo.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-		end,
 	},
 	{ "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
 	{
 		"nvim-treesitter/nvim-treesitter-refactor",
 		dependencies = "nvim-treesitter/nvim-treesitter",
+		event = { "BufRead", "BufNewFile" },
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				refactor = {
@@ -54,6 +51,7 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		dependencies = "nvim-treesitter/nvim-treesitter",
+		event = { "BufReadPost", "BufNewFile" },
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				textobjects = {
@@ -80,5 +78,10 @@ return {
 				},
 			})
 		end,
+	},
+	{
+		"nvim-treesitter/nvim-treesitter-context",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		event = { "BufReadPost", "BufNewFile" },
 	},
 }

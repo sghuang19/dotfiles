@@ -6,10 +6,7 @@ return {
 	opts = {
 		options = {
 			separator_style = "slope",
-			hover = {
-				enabled = true,
-				reveal = { "close" },
-			},
+			hover = { enabled = true, reveal = { "close" } },
 		},
 	},
 	init = function()

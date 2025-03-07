@@ -4,12 +4,13 @@ return {
 		dependencies = { "neovim/nvim-lspconfig" },
 		event = "VeryLazy",
 		config = function()
-			require("mason").setup()
+			require("mason").setup()  -- required
 		end,
 	},
 	{
 		"williamboman/mason-lspconfig.nvim",
 		dependencies = { "williamboman/mason.nvim" },
+		event = "VeryLazy",
 		config = function()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
@@ -33,9 +34,11 @@ return {
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 		dependencies = { "williamboman/mason.nvim" },
+		event = "VeryLazy",
 		opts = {
 			ensure_installed = {
 				--Linters
+				"cspell",
 				"markdownlint-cli2",
 				"stylua",
 				--Formatters

@@ -4,11 +4,11 @@ return {
 	event = { "BufWritePre" }, -- in case format on save
 	keys = {
 		{
-			"<leader>f",
+			"<leader>cf", -- avoid prefix conflict with Telescope
 			function()
 				require("conform").format()
 			end,
-			desc = "Format document",
+			desc = "Format document with Conform",
 		},
 	},
 	opts = {

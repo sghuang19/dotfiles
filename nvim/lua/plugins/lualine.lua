@@ -1,10 +1,18 @@
 return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = "nvim-tree/nvim-web-devicons",
+	event = { "BufRead", "BufNewFile" },
 	opts = {
 		options = {
 			theme = "gruvbox-material",
-			extensions = { "mason", "neo-tree" },
+			extensions = {
+				"aerial",
+				"fugitive",
+				"lazy",
+				"mason",
+				"neo-tree",
+				"toggleterm",
+			},
 		},
 	},
 	init = function()
