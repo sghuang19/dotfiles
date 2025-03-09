@@ -1,0 +1,17 @@
+[fonts]
+size = 18
+family = "MonoLisaVariable Nerd Font"
+
+[window]
+# opacity = 0.8
+decorations = "transparent"
+# blur = true
+macos-use-unified-titlebar = true
+macos-use-shadow = true
+
+[renderer]
+filters = [
+  "/Users/sghuang/.config/rio/slang-shaders/crt/newpixie-crt.slangp"
+]
+
+theme = "gruvbox"
