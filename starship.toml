@@ -1,169 +1,136 @@
-"$schema" = 'https://starship.rs/config-schema.json'
+# Adapted from builtin Gruvbox Rainbow scheme
+
+"$schema" = "https://starship.rs/config-schema.json"
+
+add_newline = false
+
+palette = "gruvbox_dark"
+
+# prefer coloring modules in main format string to decouple them
+# prefer margin without module over padding within
 
 format = """
-[](color_orange)\
-$os\
-$username\
-[](bg:color_yellow fg:color_orange)\
-$directory\
-[](fg:color_yellow bg:color_aqua)\
-$git_branch\
-$git_status\
-[](fg:color_aqua bg:color_blue)\
-$c\
-$rust\
-$golang\
-$nodejs\
-$php\
-$java\
-$kotlin\
-$haskell\
-$python\
-[](fg:color_blue bg:color_bg3)\
-$docker_context\
-$conda\
-[](fg:color_bg3 bg:color_bg1)\
-$time\
-[ ](fg:color_bg1)\
-$line_break$character"""
+[](                                      fg:color_orange )\
+[$os $username](          bg:color_orange                 )\
+[](                      bg:color_yellow fg:color_orange )\
+[ $directory ](           bg:color_yellow fg:color_fg0    )\
+[](                      bg:color_aqua   fg:color_yellow )\
+[$git_branch$git_status]( bg:color_aqua   fg:color_fg0    )\
+[](                      bg:color_blue   fg:color_aqua   )\
+[$c$nodejs$java$python](  bg:color_blue   fg:color_fg0    )\
+[](                      bg:color_bg3    fg:color_blue   )\
+$conda$docker\
+[](                      bg:color_green  fg:color_bg3    )\
+[( $jobs )](              bg:color_green  fg:color_fg0    )\
+[](                                      fg:color_green  )\
+$fill\
+[](                                      fg:color_red    )\
+[( $status )](            bg:color_red    fg:color_fg0    )\
+[](                      bg:color_red    fg:color_purple )\
+[( $cmd_duration )](      bg:color_purple fg:color_fg0    )\
+[](                      bg:color_purple fg:color_bg1    )\
+[ $time](                 bg:color_bg1    fg:color_fg0    )\
+$line_break\
+$character
+"""
 
-palette = 'gruvbox_dark'
-
-[palettes.gruvbox_dark]
-color_fg0 = '#fbf1c7'
-color_bg1 = '#3c3836'
-color_bg3 = '#665c54'
-color_blue = '#458588'
-color_aqua = '#689d6a'
-color_green = '#98971a'
-color_orange = '#d65d0e'
-color_purple = '#b16286'
-color_red = '#cc241d'
-color_yellow = '#d79921'
+# MODULES
 
 [os]
 disabled = false
-style = "bg:color_orange fg:color_fg0"
+format   = "$symbol"
 
 [os.symbols]
-Windows = "󰍲"
-Ubuntu = "󰕈"
-SUSE = ""
-Raspbian = "󰐿"
-Mint = "󰣭"
 Macos = "󰀵"
-Manjaro = ""
 Linux = "󰌽"
-Gentoo = "󰣨"
-Fedora = "󰣛"
-Alpine = ""
-Amazon = ""
-Android = ""
-Arch = "󰣇"
-Artix = "󰣇"
-EndeavourOS = ""
-CentOS = ""
-Debian = "󰣚"
-Redhat = "󱄛"
-RedHatEnterprise = "󱄛"
-Pop = ""
 
 [username]
-show_always = true
-style_user = "bg:color_orange fg:color_fg0"
-style_root = "bg:color_orange fg:color_fg0"
-format = '[ $user ]($style)'
+format = "$user"
 
 [directory]
-style = "fg:color_fg0 bg:color_yellow"
-format = "[ $path ]($style)"
-truncation_length = 3
+format            = "$path"
+truncation_length = 5
 truncation_symbol = "…/"
 
 [directory.substitutions]
-"Documents" = "󰈙 "
-"Downloads" = " "
-"Music" = "󰝚 "
-"Pictures" = " "
-"Developer" = "󰲋 "
+"Documents" = "󰈙"
+"Downloads" = ""
+"Music"     = "󰝚"
+"Pictures"  = ""
+"~/dev"     = "󰲋"
+
+[status]
+disabled   = false
+pipestatus = true
+symbol     = "" # nf-fa-xmark
+format     = "$symbol $status"
+
+[jobs]
+symbol = ""
+format = "$symbol( $number)"
+
+[time]
+disabled    = false
+time_format = "%R"
+format      = " $time"
+
+[cmd_duration]
+min_time          = 1
+show_milliseconds = true
+format            = "$duration"
 
 [git_branch]
 symbol = ""
-style = "bg:color_aqua"
-format = '[[ $symbol $branch ](fg:color_fg0 bg:color_aqua)]($style)'
+format = " $symbol $branch"
 
 [git_status]
-style = "bg:color_aqua"
-format = '[[($all_status$ahead_behind )](fg:color_fg0 bg:color_aqua)]($style)'
+format = "( $all_status$ahead_behind )"
+
+# LANGUAGES
 
 [nodejs]
 symbol = ""
-style = "bg:color_blue"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+format = " $symbol( $version) "
 
 [c]
-symbol = " "
-style = "bg:color_blue"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
-
-[rust]
-symbol = ""
-style = "bg:color_blue"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
-
-[golang]
-symbol = ""
-style = "bg:color_blue"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
-
-[php]
-symbol = ""
-style = "bg:color_blue"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
-
-[java]
-symbol = ""
-style = "bg:color_blue"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
-
-[kotlin]
-symbol = ""
-style = "bg:color_blue"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
-
-[haskell]
-symbol = ""
-style = "bg:color_blue"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+symbol = ""
+format = " $symbol( $version) "
 
 [python]
 symbol = ""
-style = "bg:color_blue"
-format = '[[ $symbol( $version) ](fg:color_fg0 bg:color_blue)]($style)'
+format = " $symbol( $version) "
 
-[docker_context]
-symbol = ""
-style = "bg:color_bg3"
-format = '[[ $symbol( $context) ](fg:#83a598 bg:color_bg3)]($style)'
+# ENVIRONMENTS
 
 [conda]
-style = "bg:color_bg3"
-format = '[[ $symbol( $environment) ](fg:#83a598 bg:color_bg3)]($style)'
+format = " $symbol( $environment) "
 
-[time]
-disabled = false
-time_format = "%R"
-style = "bg:color_bg1"
-format = '[[  $time ](fg:color_fg0 bg:color_bg1)]($style)'
+# MISC
+
+[fill]
+symbol = " "
 
 [line_break]
 disabled = false
 
 [character]
-disabled = false
-success_symbol = '[](bold fg:color_green)'
-error_symbol = '[](bold fg:color_red)'
-vimcmd_symbol = '[](bold fg:color_green)'
-vimcmd_replace_one_symbol = '[](bold fg:color_purple)'
-vimcmd_replace_symbol = '[](bold fg:color_purple)'
-vimcmd_visual_symbol = '[](bold fg:color_yellow)'
+success_symbol            = "[](bold fg:color_green )"
+error_symbol              = "[](bold fg:color_red   )"
+vimcmd_symbol             = "[](bold fg:color_green )"
+vimcmd_replace_one_symbol = "[](bold fg:color_purple)"
+vimcmd_replace_symbol     = "[](bold fg:color_purple)"
+vimcmd_visual_symbol      = "[](bold fg:color_yellow)"
+
+# PALLETE
+
+[palettes.gruvbox_dark]
+color_fg0    = "#fbf1c7"
+color_bg1    = "#3c3836"
+color_bg3    = "#665c54"
+color_blue   = "#458588"
+color_aqua   = "#689d6a"
+color_green  = "#98971a"
+color_orange = "#d65d0e"
+color_purple = "#b16286"
+color_red    = "#cc241d"
+color_yellow = "#d79921"
