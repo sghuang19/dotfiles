@@ -1,0 +1,12 @@
+font-family = "MonoLisaVariable Nerd Font"
+font-size = 18
+font-thicken = true
+font-thicken-strength = 100
+background-opacity = 0.8
+background-blur = 30
+# gruvbox material has a minor issue in ghost text color
+# theme = gruvbox-material
+theme = GruvboxDark
+macos-titlebar-style = tabs
+macos-icon = microchip
+title = " "
