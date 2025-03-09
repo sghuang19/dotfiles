@@ -1,43 +1,65 @@
-local obsidian_path = vim.fn.resolve(vim.fn.expand("~/obsidian"))
+local OBSIDIAN_VAULT = vim.fn.resolve(vim.fn.expand("~/obsidian"))
 
 return {
-	{
-		"iamcco/markdown-preview.nvim",
-		build = function()
-			vim.fn["mkdp#util#install"]() -- more robust than yarn install
-		end,
-		cmd = { "MarkdownPreview", "MarkdownPreviewToggle" },
-		keys = {
-			{ "<C-s>", "<Plug>MarkdownPreview", desc = "Start Markdown preview" },
-			{ "<M-s>", "<Plug>MarkdownPreviewStop", desc = "Stop Markdown preview" },
-			{ "<C-p>", "<Plug>MarkdownPreviewToggle", desc = "Toggle Markdown preview" },
-		},
-	},
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
 		dependencies = {
 			"nvim-tree/nvim-web-devicons",
 			"nvim-treesitter/nvim-treesitter",
+			"jbyuki/nabla.nvim",
 		},
 		cmd = "RenderMarkdown",
 		ft = "markdown",
 		opts = {
+			render_modes = true,
 			completions = { lsp = { enabled = true } },
+			win_options = { conceallevel = { rendered = 2 } },
 			-- handover math rendering to nabla
 			latex = { enabled = false },
-			win_options = { conceallevel = { rendered = 2 } },
+			on = {
+				attach = function()
+					-- must be called after render-markdown is attached
+					require("nabla").enable_virt({ autogen = true })
+				end,
+			},
 		},
 	},
-	-- { "Thiago4532/mdmath.nvim" }, -- no support for iTerm2 yet
+	-- { "Thiago4532/mdmath.nvim", build = "brew install librsvg" },
 	{
 		"jbyuki/nabla.nvim",
-		dependencies = {
-			"nvim-treesitter/nvim-treesitter",
-			opts = { ensure_installed = "latex" },
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		build = function()
+			require("nvim-treesitter.configs").setup({ ensure_installed = "latex" })
+		end,
+		keys = {
+			{
+				"<leader>p",
+				function()
+					require("nabla").popup()
+				end,
+				desc = "Show formula preview with Nabla",
+			},
 		},
+		cmd = "NablaToggleVirt",
+		init = function()
+			vim.api.nvim_create_user_command("NablaToggleVirt", function()
+				local nabla = require("nabla")
+				nabla.toggle_virt()
+				print("Nabla " .. (nabla.is_virt_enabled() and "enabled" or "disabled"))
+			end, { nargs = 0 })
+		end,
+	},
+	{
+		-- mermaid rendering
+		"3rd/diagram.nvim",
+		build = "bun install -g @mermaid-js/mermaid-cli",
+		dependencies = "3rd/image.nvim",
 		ft = "markdown",
+		cond = false, -- currently not working due to a bug
 		config = function()
-			require("nabla").enable_virt({ autogen = true })
+			require("diagram").setup({
+				integrations = { require("diagram.integrations.markdown") },
+			})
 		end,
 	},
 	{
@@ -70,14 +92,27 @@ return {
 				desc = "Follow Obsidian link",
 			},
 		},
-		event = { "BufReadPost " .. obsidian_path .. "/*.md" },
+		event = { "BufReadPost " .. OBSIDIAN_VAULT .. "/*.md" },
 		opts = {
 			ui = { enable = false }, -- use render-markdown instead
-			workspaces = { { name = "TECH", path = obsidian_path } },
+			workspaces = { { name = "TECH", path = OBSIDIAN_VAULT } },
 			disable_frontmatter = true,
 			open_app_foreground = true,
 			picker = { "telescope.nvim" },
 			mappings = {}, -- disable default mappings
+		},
+	},
+	{ "ellisonleao/glow.nvim", opts = {}, cmd = "Glow" },
+	{
+		"iamcco/markdown-preview.nvim",
+		build = function()
+			vim.fn["mkdp#util#install"]() -- more robust than yarn install
+		end,
+		ft = "markdown", -- cannot load lazier since the commands are not global
+		keys = {
+			{ "<C-s>", "<Plug>MarkdownPreview", desc = "Start Markdown preview" },
+			{ "<M-s>", "<Plug>MarkdownPreviewStop", desc = "Stop Markdown preview" },
+			{ "<C-p>", "<Plug>MarkdownPreviewToggle", desc = "Toggle Markdown preview" },
 		},
 	},
 }
