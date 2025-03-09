@@ -3,7 +3,6 @@ if status is-interactive
 end
 
 set fish_greeting ""
-fish_vi_key_bindings
 
 # PATH
 fish_add_path $HOME/.local/bin
