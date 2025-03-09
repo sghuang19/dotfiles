@@ -10,25 +10,25 @@ palette = "gruvbox_dark"
 # prefer margin without module over padding within
 
 format = """
-[ $os( $username)](            bg:color_orange                 )\
-                          []( bg:color_yellow fg:color_orange )\
-               [ $directory ]( bg:color_yellow fg:color_fg0    )\
-                          []( bg:color_aqua   fg:color_yellow )\
-[ $git_branch( $git_status) ]( bg:color_aqua   fg:color_fg0    )\
-                          []( bg:color_blue   fg:color_aqua   )\
-     [ $c$nodejs$java$python]( bg:color_blue   fg:color_fg0    )\
-                          []( bg:color_bg3    fg:color_blue   )\
-              [$conda$docker]( bg:color_bg3    fg:color_fg0    )\
-                          []( bg:color_green  fg:color_bg3    )\
-                  [( $jobs )]( bg:color_green  fg:color_fg0    )\
-                          [](                 fg:color_green  )\
-                        $fill                                   \
-                          [](                 fg:color_red    )\
-                [( $status )]( bg:color_red    fg:color_fg0    )\
-                          []( bg:color_red    fg:color_purple )\
-          [( $cmd_duration )]( bg:color_purple fg:color_fg0    )\
-                          []( bg:color_purple fg:color_bg1    )\
-                    [ $time ]( bg:color_bg1    fg:color_fg0    )\
+[ $os( $username)](              bg:color_orange                 )\
+                            []( bg:color_yellow fg:color_orange )\
+                 [ $directory ]( bg:color_yellow fg:color_fg0    )\
+                            []( bg:color_aqua   fg:color_yellow )\
+[( $git_branch( $git_status) )]( bg:color_aqua   fg:color_fg0    )\
+                            []( bg:color_blue   fg:color_aqua   )\
+    [( $c$nodejs$java$python )]( bg:color_blue   fg:color_fg0    )\
+                            []( bg:color_bg3    fg:color_blue   )\
+                [$conda$docker]( bg:color_bg3    fg:color_fg0    )\
+                            []( bg:color_green  fg:color_bg3    )\
+                    [( $jobs )]( bg:color_green  fg:color_fg0    )\
+                            [](                 fg:color_green  )\
+                          $fill                                   \
+                            [](                 fg:color_red    )\
+                  [( $status )]( bg:color_red    fg:color_fg0    )\
+                            []( bg:color_red    fg:color_purple )\
+            [( $cmd_duration )]( bg:color_purple fg:color_fg0    )\
+                            []( bg:color_purple fg:color_bg1    )\
+                      [ $time ]( bg:color_bg1    fg:color_fg0    )\
 $line_break $shell
 """
 
@@ -97,20 +97,20 @@ format = "($all_status$ahead_behind)"
 
 [nodejs]
 symbol = " "
-format = "$symbol($version) "
+format = "$symbol($version)"
 
 [c]
 symbol = " "
-format = "$symbol($version) "
+format = "$symbol($version)"
 
 [python]
 symbol = " "
-format = "$symbol($version) "
+format = "$symbol($version)"
 
 # ENVIRONMENTS
 
 [conda]
-format = "$symbol($environment) "
+format = "$symbol($environment)"
 
 # MISC
 
