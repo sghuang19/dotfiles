@@ -17,7 +17,7 @@ const runShellCommand = (command: string): string => {
 };
 
 const siliconFlowKey = runShellCommand(
-  "op read op://dev/silicon-flow/continue",
+  "op read op://dev/silicon-flow/continue"
 );
 const voyageKey = runShellCommand("op read 'op://dev/voyage-ai/credential'");
 const anthropicKey = runShellCommand("op read 'op://dev/anthropic/continue'");
@@ -94,7 +94,7 @@ const GPT4o: ModelDescription = {
   apiKey: openAIKey,
 };
 
-/** Embeddings Provider */
+/* Embeddings Provider */
 
 const BGEM3: EmbeddingsProviderDescription = {
   ...SiliconFlow,
@@ -107,7 +107,7 @@ const VoyageCode3: EmbeddingsProviderDescription = {
   apiKey: voyageKey,
 };
 
-/** Reranker */
+/* Reranker */
 
 const BGERerankerV2M3: RerankerDescription = {
   name: "siliconflow",
@@ -127,7 +127,7 @@ const VoyageRerank2: RerankerDescription = {
 
 export function modifyConfig(config: Config): Config {
   [DSV3, DSR1, DSV3Pro, DSR1Pro, Sonnet, GPT4o].forEach((model) =>
-    config.models.push(model),
+    config.models.push(model)
   );
   config.tabAutocompleteModel = Qwen25;
   config.embeddingsProvider = BGEM3;
