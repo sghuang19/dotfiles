@@ -1,0 +1,17 @@
+[general]
+live_config_reload = true
+
+[window]
+dynamic_padding = true
+decorations = "Buttonless"
+opacity = 0.8
+blur = true
+dynamic_title = false
+
+[font]
+size = 18
+normal.family = "MonoLisaVariable Nerd Font"
+
+[terminal]
+shell.program = "/opt/homebrew/bin/fish"
+shell.args = ["-c", "tmux attach -t base; or tmux new -s base; fish"]
