@@ -7,21 +7,14 @@
 // @ts-ignore - can't find type definitions here
 import { execSync } from "node:child_process";
 
-const runShellCommand = (command: string): string => {
-  try {
-    return execSync(command, { encoding: "utf8" }).trim();
-  } catch (error) {
-    console.error("Error:", error);
-    return "";
-  }
+const fetchKey = (path: string): string => {
+  return execSync(`op read op://${path}`, { encoding: "utf8" }).trim();
 };
 
-const siliconFlowKey = runShellCommand(
-  "op read op://dev/silicon-flow/continue"
-);
-const voyageKey = runShellCommand("op read 'op://dev/voyage-ai/credential'");
-const anthropicKey = runShellCommand("op read 'op://dev/anthropic/continue'");
-const openAIKey = runShellCommand("op read 'op://dev/openai/continue'");
+const siliconFlowKey = fetchKey("dev/silicon-flow/continue");
+const voyageKey = fetchKey("dev/voyage-ai/credential");
+const anthropicKey = fetchKey("dev/anthropic/continue");
+const openAIKey = fetchKey("dev/openai/continue");
 
 /* Model Definitions */
 
@@ -127,7 +120,7 @@ const VoyageRerank2: RerankerDescription = {
 
 export function modifyConfig(config: Config): Config {
   [DSV3, DSR1, DSV3Pro, DSR1Pro, Sonnet, GPT4o].forEach((model) =>
-    config.models.push(model)
+    config.models.push(model),
   );
   config.tabAutocompleteModel = Qwen25;
   config.embeddingsProvider = BGEM3;
