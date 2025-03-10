@@ -1,19 +1,16 @@
--- Editing tools
+-- EDITTING TOOLS
 
 return {
+	{ "tpope/vim-unimpaired", event = { "BufRead", "BufNewFile" } },
+	{ "tpope/vim-commentary", event = { "BufRead", "BufNewFile" } },
+	{ "kylechui/nvim-surround", event = { "BufRead", "BufNewFile" }, opts = {} },
+
 	-- TODO: need to figure out how to use these plugins
 	{ "mbbill/undotree", cmd = "UndotreeToggle" },
 
-	{ "tpope/vim-repeat", event = "VeryLazy" },
-	{ "tpope/vim-surround", event = "VeryLazy" },
-	{ "tpope/vim-commentary", event = "VeryLazy" },
-	{ "tpope/vim-unimpaired", event = "VeryLazy" },
+	-- TODO: need to compare more align plugins
+	{ "echasnovski/mini.align", opts = {} },
 
-	{
-		-- TODO: need to compare more align plugins
-		"echasnovski/mini.align",
-		opts = {},
-	},
 	{
 		"windwp/nvim-ts-autotag",
 		dependencies = "nvim-treesitter/nvim-treesitter",
@@ -28,5 +25,6 @@ return {
 		event = "InsertEnter",
 		opts = { check_ts = true, fast_wrap = {} },
 	},
+
 	-- TODO: vim-sleuth
 }
