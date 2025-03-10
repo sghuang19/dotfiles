@@ -4,13 +4,21 @@ return {
 	{ "tpope/vim-unimpaired", event = { "BufRead", "BufNewFile" } },
 	{ "tpope/vim-commentary", event = { "BufRead", "BufNewFile" } },
 	{ "kylechui/nvim-surround", event = { "BufRead", "BufNewFile" }, opts = {} },
-
-	-- TODO: need to figure out how to use these plugins
-	{ "mbbill/undotree", cmd = "UndotreeToggle" },
-
+	{
+		"mbbill/undotree",
+		keys = {
+			{ "<Leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle [u]ndo tree" } },
+		},
+		cmd = { "UndotreeToggle", "UndotreeShow" },
+		config = function()
+			vim.g.undotree_WindowLayout = 2
+		end,
+	},
 	-- TODO: need to compare more align plugins
-	{ "echasnovski/mini.align", opts = {} },
-
+	{
+		"echasnovski/mini.align",
+		opts = {},
+	},
 	{
 		"windwp/nvim-ts-autotag",
 		dependencies = "nvim-treesitter/nvim-treesitter",
