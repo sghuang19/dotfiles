@@ -1,3 +1,5 @@
+# the initial-command is executed by bash by default
+initial-command = $SHELL -c "tmux attach -t base; or tmux new -s base; fish"
 font-family = "MonoLisaVariable Nerd Font"
 font-size = 18
 font-thicken = true
