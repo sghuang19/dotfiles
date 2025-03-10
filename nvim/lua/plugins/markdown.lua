@@ -78,6 +78,7 @@ return {
 			"ObsidianQuickSwitch",
 		},
 		keys = {
+			{"<leader>oo", "<Cmd>ObsidianOpen<CR>", desc = "[O]pen note in [O]bsidian"},
 			{
 				"gf",
 				function()
