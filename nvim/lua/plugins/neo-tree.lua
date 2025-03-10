@@ -59,4 +59,16 @@ return {
 			picker_config = { handle_mouse_click = true },
 		},
 	},
+	{
+		-- update import paths when renaming files
+		-- FIXME: somehow doesn't work without manually reloading, see
+		-- https://github.com/antosha417/nvim-lsp-file-operations/issues/44
+		"antosha417/nvim-lsp-file-operations",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-neo-tree/neo-tree.nvim",
+		},
+		event = "LspAttach",
+		opts = {}, -- required
+	},
 }
