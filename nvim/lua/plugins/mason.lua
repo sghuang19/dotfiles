@@ -1,15 +1,8 @@
 return {
-	{
-		"williamboman/mason.nvim",
-		dependencies = { "neovim/nvim-lspconfig" },
-		event = "VeryLazy",
-		config = function()
-			require("mason").setup()  -- required
-		end,
-	},
+	{ "williamboman/mason.nvim", lazy = true, config = true },
 	{
 		"williamboman/mason-lspconfig.nvim",
-		dependencies = { "williamboman/mason.nvim" },
+		dependencies = "neovim/nvim-lspconfig",
 		event = "VeryLazy",
 		config = function()
 			require("mason-lspconfig").setup({
@@ -17,10 +10,14 @@ return {
 					"cssls",
 					"html",
 					"jsonls",
+					"lemminx", -- xml
 					"lua_ls",
+					"marksman",
 					"ruff",
+					"taplo",
 					"ts_ls",
 					"unocss",
+					"vimls",
 					"volar",
 				},
 			})
@@ -33,7 +30,6 @@ return {
 	},
 	{
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		dependencies = { "williamboman/mason.nvim" },
 		event = "VeryLazy",
 		opts = {
 			ensure_installed = {
@@ -41,6 +37,7 @@ return {
 				"cspell",
 				"markdownlint-cli2",
 				"stylua",
+				"vint", -- Vim script
 				--Formatters
 				"prettier",
 				"prettierd",
