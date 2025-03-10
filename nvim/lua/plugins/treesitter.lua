@@ -1,8 +1,7 @@
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
-		version = "*",
-		build = "<cmd>TSUpadte<cr>",
+		build = { "brew install tree-sitter", ":TSUpdate" },
 		event = { "BufRead", "BufNewFile" },
 		opts = {
 			auto_install = true,
@@ -18,12 +17,19 @@ return {
 				},
 			},
 		},
+		config = function(_, opts)
+			require("nvim-treesitter.configs").setup(opts)
+		end,
 	},
-	{ "nvim-treesitter/playground", cmd = "TSPlaygroundToggle" },
+	{
+		"nvim-treesitter/playground",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		cmd = "TSPlaygroundToggle",
+	},
 	{
 		"nvim-treesitter/nvim-treesitter-refactor",
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		event = { "BufRead", "BufNewFile" },
+		event = { "BufRead", "BufNewFile" }, -- for definition highlights
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				refactor = {
@@ -39,8 +45,8 @@ return {
 							goto_definition = "gnd",
 							list_definitions = "gnD",
 							list_definitions_toc = "gO",
-							goto_next_usage = "<a-*>",
-							goto_previous_usage = "<a-#>",
+							goto_next_usage = "<A-*>",
+							goto_previous_usage = "<A-#>",
 						},
 					},
 				},
@@ -51,37 +57,76 @@ return {
 	{
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		dependencies = "nvim-treesitter/nvim-treesitter",
-		event = { "BufReadPost", "BufNewFile" },
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				textobjects = {
-					select = {
-						enable = true,
-						lookahead = true,
-						keymaps = {
-							["af"] = "@function.outer",
-							["if"] = "@function.inner",
-							["ac"] = "@class.outer",
-							["ic"] = "@class.inner",
-							["as"] = {
-								query = "@local.scope",
-								query_group = "locals",
-							},
+		keys = function()
+			local t = {}
+			for _, k in ipairs({ "af", "if", "ac", "ic", "as" }) do
+				table.insert(t, { k, mode = "v" })
+			end
+			return t
+		end,
+		opts = {
+			textobjects = {
+				select = {
+					enable = true,
+					lookahead = true,
+					keymaps = {
+						["af"] = {
+							query = "@function.outer",
+							desc = "Select [a] [f]unction",
 						},
-						selection_modes = {
-							["@parameter.outer"] = "v", -- charwise
-							["@function.outer"] = "V", -- linewise
-							["@class.outer"] = "<c-v>", -- blockwise
+						["if"] = {
+							query = "@function.inner",
+							desc = "Select inner of a [f]unction",
 						},
-						include_surrounding_whitespace = true,
+						["ac"] = {
+							query = "@class.outer",
+							desc = "Select [a] [c]lass",
+						},
+						["ic"] = {
+							query = "@class.inner",
+							desc = "Select [i]nner of a [c]lass",
+						},
+						["as"] = {
+							query = "@local.scope",
+							desc = "Select [a] [s]cope",
+						},
 					},
+					include_surrounding_whitespace = true,
 				},
-			})
+			},
+		},
+		config = function(_, opts)
+			require("nvim-treesitter.configs").setup(opts)
 		end,
 	},
 	{
+		-- TODO: use [c to jump to beginning of context
+		-- TODO: adjust highlihgt of context, so that it looks different from
+		-- selection
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		event = { "BufReadPost", "BufNewFile" },
+		opts = { multiwindow = true, min_window_height = 30 },
+	},
+	-- TODO: consider moving these specs out of treesitter module
+	{
+		"folke/twilight.nvim",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		cmd = { "Twilight", "TwilightEnable" },
+		opts = { dimming = { alpha = 0.5 } },
+	},
+	{
+		"windwp/nvim-ts-autotag",
+		dependencies = "nvim-treesitter/nvim-treesitter",
+		ft = {
+			"astro",
+			"html",
+			"javascriptreact",
+			"markdown",
+			"typescriptreact",
+			"vue",
+			"xml",
+		},
+		config = true,
 	},
 }
