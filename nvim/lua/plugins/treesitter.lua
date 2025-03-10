@@ -100,33 +100,13 @@ return {
 		end,
 	},
 	{
-		-- TODO: use [c to jump to beginning of context
+		-- TODO: use [c to jump to beginning of context, currently it's used by
+		-- git gutter to navigate between hunks
 		-- TODO: adjust highlihgt of context, so that it looks different from
 		-- selection
 		"nvim-treesitter/nvim-treesitter-context",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		event = { "BufReadPost", "BufNewFile" },
 		opts = { multiwindow = true, min_window_height = 30 },
-	},
-	-- TODO: consider moving these specs out of treesitter module
-	{
-		"folke/twilight.nvim",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		cmd = { "Twilight", "TwilightEnable" },
-		opts = { dimming = { alpha = 0.5 } },
-	},
-	{
-		"windwp/nvim-ts-autotag",
-		dependencies = "nvim-treesitter/nvim-treesitter",
-		ft = {
-			"astro",
-			"html",
-			"javascriptreact",
-			"markdown",
-			"typescriptreact",
-			"vue",
-			"xml",
-		},
-		config = true,
 	},
 }

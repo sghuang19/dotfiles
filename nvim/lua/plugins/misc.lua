@@ -78,22 +78,6 @@ return {
 		opts = {}, -- required
 	},
 
-	-- Editing tools
-
-	-- TODO: need to figure out how to use these plugins
-	{ "mbbill/undotree", cmd = "UndotreeToggle" },
-	{ "tpope/vim-repeat", event = "VeryLazy" },
-	{ "tpope/vim-surround", event = "VeryLazy" },
-	{ "tpope/vim-commentary", event = "VeryLazy" },
-	{ "tpope/vim-unimpaired", event = "VeryLazy" },
-	{
-		-- TODO: need to compare more align plugins
-		"echasnovski/mini.align",
-		opts = {},
-	},
-	-- TODO: nvim-autopairs
-	-- TODO: vim-sleuth
-
 	-- Misc
 
 	{ "tpope/vim-sensible", event = "VimEnter" },
@@ -115,7 +99,13 @@ return {
 	{
 		-- TODO: the naviations after entering Zen mode doesn't persist, the
 		-- status line are also showing up when exiting neo-tree, create issue
-		"folke/zen-mode.nvim",
+		"folke/zen-mode.nvim", -- automatically enabled in zen mode
+		dependencies = {
+			"folke/twilight.nvim",
+			dependencies = "nvim-treesitter/nvim-treesitter",
+			cmd = { "Twilight", "TwilightEnable" },
+			opts = { dimming = { alpha = 0.5 } },
+		},
 		cmd = "ZenMode",
 		keys = { { "<Leader>z", "<Cmd>ZenMode<CR>", desc = "Toggle [Z]en Mode" } },
 		opts = {
