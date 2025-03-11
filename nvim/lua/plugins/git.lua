@@ -1,5 +1,5 @@
 return {
-	{ "tpope/vim-fugitive", event = "VeryLazy" },
+	{ "tpope/vim-fugitive", event = "VeryLazy" }, -- too many commands
 	{
 		"airblade/vim-gitgutter",
 		event = { "BufRead", "BufNewFile" },
@@ -17,9 +17,7 @@ return {
 			"LazyGitFilterCurrentFile",
 			"LazyGitLog",
 		},
-		keys = {
-			{ "<leader>lg", ":LazyGit<cr>", desc = "LazyGit" },
-		},
+		keys = { { "<Leader>g", vim.cmd.LazyGit, desc = "Lazy[g]it" } },
 		config = function()
 			vim.g.lazygit_floating_window_scaling_factor = 0.9
 		end,

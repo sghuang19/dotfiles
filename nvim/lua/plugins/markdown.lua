@@ -33,11 +33,11 @@ return {
 		end,
 		keys = {
 			{
-				"<leader>p",
+				"<Leader>m",
 				function()
 					require("nabla").popup()
 				end,
-				desc = "Show formula preview with Nabla",
+				desc = "Show Nabla [m]ath preview popup",
 			},
 		},
 		cmd = "NablaToggleVirt",
@@ -78,7 +78,7 @@ return {
 			"ObsidianQuickSwitch",
 		},
 		keys = {
-			{"<leader>oo", "<Cmd>ObsidianOpen<CR>", desc = "[O]pen note in [O]bsidian"},
+			{ "<leader>oo", "<Cmd>ObsidianOpen<CR>", desc = "[O]pen note in [O]bsidian" },
 			{
 				"gf",
 				function()
