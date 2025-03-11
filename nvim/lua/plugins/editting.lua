@@ -9,7 +9,12 @@ return {
 		"tpope/vim-sleuth",
 		event = { "BufRead", "BufNewFile" },
 	},
-	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+	{
+		"lukas-reineke/indent-blankline.nvim",
+		main = "ibl",
+		event = { "BufRead", "BufNewFile" },
+		opts = {},
+	},
 	{ "kylechui/nvim-surround", event = { "BufRead", "BufNewFile" }, opts = {} },
 	{
 		"mbbill/undotree",
