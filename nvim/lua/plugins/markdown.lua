@@ -1,5 +1,6 @@
 local OBSIDIAN_VAULT = vim.fn.resolve(vim.fn.expand("~/obsidian"))
 
+---@type LazySpec
 return {
 	{
 		"MeanderingProgrammer/render-markdown.nvim",
@@ -10,6 +11,9 @@ return {
 		},
 		cmd = "RenderMarkdown",
 		ft = "markdown",
+		---@module "render-markdown"
+		---@type render.md.Config
+		---@diagnostic disable: missing-fields
 		opts = {
 			render_modes = true,
 			completions = { lsp = { enabled = true } },
@@ -23,13 +27,17 @@ return {
 				end,
 			},
 		},
+		---@diagnostic enable: missing-fields
 	},
 	-- { "Thiago4532/mdmath.nvim", build = "brew install librsvg" },
 	{
 		"jbyuki/nabla.nvim",
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		build = function()
-			require("nvim-treesitter.configs").setup({ ensure_installed = "latex" })
+			---@diagnostic disable-next-line: missing-fields
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = "latex",
+			})
 		end,
 		keys = {
 			{
@@ -94,6 +102,9 @@ return {
 			},
 		},
 		event = { "BufReadPost " .. OBSIDIAN_VAULT .. "/*.md" },
+		---@module "obsidian"
+		---@type obsidian.config.ClientOpts
+		---@diagnostic disable: missing-fields
 		opts = {
 			ui = { enable = false }, -- use render-markdown instead
 			workspaces = { { name = "TECH", path = OBSIDIAN_VAULT } },
@@ -102,6 +113,7 @@ return {
 			picker = { "telescope.nvim" },
 			mappings = {}, -- disable default mappings
 		},
+		---@diagnostic enable: missing-fields
 	},
 	{ "ellisonleao/glow.nvim", opts = {}, cmd = "Glow" },
 	{

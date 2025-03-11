@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
 	"nvimdev/dashboard-nvim",
 	dependencies = "nvim-tree/nvim-web-devicons",
@@ -5,7 +6,7 @@ return {
 	cmd = "Dashboard",
 	init = function()
 		-- TODO: somehow the default start screen is flashed
-		vim.opt.shortmess:append("I")  -- disables the msg as a workaround
+		vim.opt.shortmess:append("I") -- disables the msg as a workaround
 	end,
 	opts = {
 		hide = { statusline = true },

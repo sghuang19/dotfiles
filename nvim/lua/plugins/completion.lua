@@ -1,11 +1,13 @@
 -- TODO: experimental setting, needs improvements
 
+---@type LazySpec
 return {
 	{
 		"saghen/blink.cmp",
-		version = "*", -- needed for fuzzy binary downloa
+		version = "*", -- needed for fuzzy binary download
 		dependencies = "rafamadriz/friendly-snippets",
 		event = "InsertEnter",
+		---@type blink.cmp.Config
 		opts = {
 			keymap = { preset = "default" },
 			sources = { default = { "lsp", "path", "snippets", "buffer" } },
@@ -18,7 +20,7 @@ return {
 			"saghen/blink.cmp",
 			"williamboman/mason-lspconfig.nvim", -- let Mason setup all servers
 		},
-		events = "VeryLazy",
+		event = "VeryLazy",
 		opts = { servers = {} },
 		config = function(_, opts)
 			local lspconfig = require("lspconfig")

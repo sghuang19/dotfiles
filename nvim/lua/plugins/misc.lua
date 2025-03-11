@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
 	-- Project management
 
@@ -54,6 +55,8 @@ return {
 			"nvim-treesitter/nvim-treesitter",
 		},
 		event = "LspAttach",
+		---@module "lspsaga"
+		---@type LspsagaConfig
 		opts = { lightbulb = { enable = false } }, -- takes up to much space
 	},
 	{
@@ -108,6 +111,9 @@ return {
 		},
 		cmd = "ZenMode",
 		keys = { { "<Leader>z", "<Cmd>ZenMode<CR>", desc = "Toggle [Z]en Mode" } },
+		---@module "zen-mode"
+		---@type ZenOptions
+		---@diagnostic disable: missing-fields
 		opts = {
 			plugins = {
 				options = { laststatus = 0 }, -- hide statusline
@@ -121,12 +127,16 @@ return {
 				},
 			},
 		},
+		---@diagnostic enable: missing-fields
 	},
 	{
 		"akinsho/toggleterm.nvim",
 		cmd = "ToggleTerm",
 		-- FIXME: first invocation of key map doesn't work sometimes
 		keys = "<C-\\>",
+		---@module "toggleterm"
+		---@type ToggleTermConfig
+		---@diagnostic disable-next-line: missing-fields
 		opts = { open_mapping = [[<C-\>]] },
 	},
 	{

@@ -1,6 +1,6 @@
+---@type LazySpec
 return {
 	"sainnhe/gruvbox-material",
-	-- event = "VimEnter",
 	lazy = false,
 	priority = 1000,
 	config = function()

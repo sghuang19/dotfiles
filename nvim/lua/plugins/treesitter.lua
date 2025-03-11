@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
 	{
 		"nvim-treesitter/nvim-treesitter",
@@ -31,6 +32,7 @@ return {
 		dependencies = "nvim-treesitter/nvim-treesitter",
 		event = { "BufRead", "BufNewFile" }, -- for definition highlights
 		config = function()
+			---@diagnostic disable-next-line: missing-fields
 			require("nvim-treesitter.configs").setup({
 				refactor = {
 					highlight_definitions = { enable = true },
@@ -64,6 +66,7 @@ return {
 			end
 			return t
 		end,
+		---@module "nvim-treesitter-textobjects"
 		opts = {
 			textobjects = {
 				select = {

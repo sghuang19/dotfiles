@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
 	{
 		"nvim-neo-tree/neo-tree.nvim",
@@ -32,14 +33,16 @@ return {
 			{
 				"<Leader>b",
 				"<Cmd>Neotree toggle show buffers right<CR>",
-				desc = "Toggle buffer explorer",
+				desc = "Toggle [b]uffer explorer",
 			},
 			{
 				"<Leader>s",
 				"<Cmd>Neotree toggle float git_status<CR>",
-				desc = "Show Git status in Neotree",
+				desc = "Show Git [s]tatus in Neotree",
 			},
 		},
+		---@module "neo-tree"
+		---@type neotree.Config
 		opts = {
 			filesystem = { hijack_netrw_behavior = "open_current" },
 			window = {
@@ -48,6 +51,7 @@ return {
 					["P"] = { "toggle_preview", config = { use_image_nvim = true } },
 				},
 			},
+			---@diagnostic disable-next-line: missing-fields
 			source_selector = { winbar = true }, -- statusline is taken
 		},
 	},

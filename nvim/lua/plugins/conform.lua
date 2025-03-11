@@ -1,3 +1,4 @@
+---@type {[string]: string[]}
 local formatters_by_ft = {
 	fish = { "fish_indent" },
 	lua = { "stylua" },
@@ -14,19 +15,22 @@ for _, ft in ipairs({ "javascript", "typescript", "vue" }) do
 	formatters_by_ft[ft] = { "prettierd" }
 end
 
+---@type LazySpec
 return {
 	"stevearc/conform.nvim",
 	cmd = "ConformInfo",
 	event = "BufWritePre", -- in case format on save
 	keys = {
 		{
-			"<leader>cf", -- avoid prefix conflict with Telescope
+			"<Leader>cf", -- avoid prefix conflict with Telescope
 			function()
 				require("conform").format()
 			end,
-			desc = "Format document with Conform",
+			desc = "[c]ode [f]ormat (Conform)",
 		},
 	},
+	---@module "conform"
+	---@type conform.setupOpts
 	opts = {
 		formatters_by_ft = formatters_by_ft,
 		format_options = { async = true, lsp_fallback = true },

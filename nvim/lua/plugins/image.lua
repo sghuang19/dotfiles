@@ -1,4 +1,5 @@
 -- requires imagemagick and tmux config
+---@type LazySpec
 return {
 	"3rd/image.nvim",
 	build = "brew install imagemagick",

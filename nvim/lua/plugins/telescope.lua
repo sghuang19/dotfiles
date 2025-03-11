@@ -1,3 +1,4 @@
+---@type LazySpec
 return {
 	"nvim-telescope/telescope.nvim",
 	dependencies = {
@@ -9,18 +10,39 @@ return {
 	cmd = "Telescope",
 	keys = {
 		-- custom mappings
-		{ "<leader>t", "<cmd>Telescope<cr>" },
+		{ "<Leader>t", "<Cmd>Telescope<CR>", desc = "Open [t]elescope" },
 		-- recommended by Telescope
-		{ "<leader>ff", require("telescope.builtin").find_files, desc = "Telescope find files" },
-		{ "<leader>fg", require("telescope.builtin").live_grep, desc = "Telescope live grep" },
-		{ "<leader>fb", require("telescope.builtin").buffers, desc = "Telescope buffers" },
-		{ "<leader>fh", require("telescope.builtin").help_tags, desc = "Telescope help tags" },
+		{
+			"<leader>ff",
+			require("telescope.builtin").find_files,
+			desc = "[f]ind [f]iles (Telescope)",
+		},
+		{
+			"<leader>fg",
+			require("telescope.builtin").live_grep,
+			desc = "[l]ive [g]rep (Telescope)",
+		},
+		{
+			"<leader>fb",
+			require("telescope.builtin").buffers,
+			desc = "[f]ind [b]uffers (Telescope)",
+		},
+		{
+			"<leader>fh",
+			require("telescope.builtin").help_tags,
+			desc = "[f]ind [h]elp tags (Telescope)",
+		},
 	},
+	---@module "telescope"
 	opts = {
-		defaults = { layout_config = { horizontal = {
-			preview_cutoff = 30,
-			preview_width = 0.8,
-		} } },
+		defaults = {
+			---@type TelescopeLayout.config
+			---@diagnostic disable-next-line: missing-fields
+			layout_config = { horizontal = {
+				preview_cutoff = 30,
+				preview_width = 0.8,
+			} },
+		},
 	},
 	config = function()
 		for _, e in ipairs({ "fzf", "lazy_plugins" }) do

@@ -1,7 +1,16 @@
+---@type LazySpec
 return {
-	{ "folke/lazydev.nvim", ft = "lua" },
+	{
+		"folke/lazydev.nvim",
+		ft = "lua",
+		---@module "lazydev"
+		---@type lazydev.Config
+		opts = { library = { "lazy.nvim" } },
+	},
 	{
 		"saghen/blink.cmp",
+		---@module "blink-cmp"
+		---@type blink.cmp.Config
 		opts = {
 			sources = {
 				default = { "lazydev" },
