@@ -3,11 +3,21 @@
 return {
 	{ "tpope/vim-unimpaired", event = { "BufRead", "BufNewFile" } },
 	{ "tpope/vim-commentary", event = { "BufRead", "BufNewFile" } },
+	{
+		-- sets shiftwidth expandtab heuristically
+		"tpope/vim-sleuth",
+		event = { "BufRead", "BufNewFile" },
+	},
+	{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
 	{ "kylechui/nvim-surround", event = { "BufRead", "BufNewFile" }, opts = {} },
 	{
 		"mbbill/undotree",
 		keys = {
-			{ "<Leader>u", vim.cmd.UndotreeToggle, { desc = "Toggle [u]ndo tree" } },
+			{
+				"<Leader>u",
+				vim.cmd.UndotreeToggle,
+				{ desc = "Toggle [u]ndo tree" },
+			},
 		},
 		cmd = { "UndotreeToggle", "UndotreeShow" },
 		config = function()
@@ -33,6 +43,4 @@ return {
 		event = "InsertEnter",
 		opts = { check_ts = true, fast_wrap = {} },
 	},
-
-	-- TODO: vim-sleuth
 }
