@@ -5,32 +5,39 @@ return {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		"polirritmico/telescope-lazy-plugins.nvim",
+		"nvim-treesitter/nvim-treesitter",
+		"nvim-tree/nvim-web-devicons",
 	},
 	build = "brew install rg fd", -- for extended functionality
 	cmd = "Telescope",
 	keys = {
-		-- custom mappings
-		{ "<Leader>t", "<Cmd>Telescope<CR>", desc = "Open [t]elescope" },
 		-- recommended by Telescope
 		{
-			"<leader>ff",
+			"<Leader>ff",
 			require("telescope.builtin").find_files,
 			desc = "[f]ind [f]iles (Telescope)",
 		},
 		{
-			"<leader>fg",
+			"<Leader>fg",
 			require("telescope.builtin").live_grep,
 			desc = "[l]ive [g]rep (Telescope)",
 		},
 		{
-			"<leader>fb",
+			"<Leader>fb",
 			require("telescope.builtin").buffers,
 			desc = "[f]ind [b]uffers (Telescope)",
 		},
 		{
-			"<leader>fh",
+			"<Leader>fh",
 			require("telescope.builtin").help_tags,
 			desc = "[f]ind [h]elp tags (Telescope)",
+		},
+		-- custom mappings
+		{ "<Leader>t", "<Cmd>Telescope<CR>", desc = "Open [t]elescope" },
+		{
+			"<Leader>fc",
+			require("telescope.builtin").commands,
+			desc = "[f]ind [c]ommands (Telescope)",
 		},
 	},
 	---@module "telescope"
