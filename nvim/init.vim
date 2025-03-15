@@ -5,9 +5,14 @@ lua require("config.lazy")
 
 set colorcolumn=81,101,121
 set mouse=a
-set shiftwidth=4
 set signcolumn=yes:2
+
+" will be overridden by vim-sleuth
+set expandtab
+set shiftwidth=4
 set tabstop=4
+
+let g:python3_host_prog = "~/venvs/nvim/bin/python"
 
 " Neovide configs
 
