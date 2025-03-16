@@ -10,12 +10,13 @@ return {
 			"jbyuki/nabla.nvim",
 		},
 		cmd = "RenderMarkdown",
-		ft = "markdown",
+		ft = { "markdown", "Avante", "AvanteInput" },
 		---@module "render-markdown"
 		---@type render.md.Config
 		---@diagnostic disable: missing-fields
 		opts = {
 			render_modes = true,
+			file_types = { "markdown", "Avante", "AvanteInput" },
 			completions = { lsp = { enabled = true } },
 			win_options = { conceallevel = { rendered = 2 } },
 			-- handover math rendering to nabla
@@ -28,6 +29,32 @@ return {
 			},
 		},
 		---@diagnostic enable: missing-fields
+		--TODO: blink.cmp integration
+	},
+	{ "ellisonleao/glow.nvim", cmd = "Glow", opts = {} },
+	{
+		"iamcco/markdown-preview.nvim",
+		build = function()
+			vim.fn["mkdp#util#install"]() -- more robust than yarn install
+		end,
+		ft = "markdown", -- cannot load lazier since the commands are not global
+		keys = {
+			{
+				"<C-s>",
+				"<Plug>MarkdownPreview",
+				desc = "[s]tart Markdown preview",
+			},
+			{
+				"<M-s>",
+				"<Plug>MarkdownPreviewStop",
+				desc = "[s]top Markdown preview",
+			},
+			{
+				"<C-p>",
+				"<Plug>MarkdownPreviewToggle",
+				desc = "Toggle Markdown [p]review",
+			},
+		},
 	},
 	-- { "Thiago4532/mdmath.nvim", build = "brew install librsvg" },
 	{
@@ -63,7 +90,7 @@ return {
 		build = "bun install -g @mermaid-js/mermaid-cli",
 		dependencies = "3rd/image.nvim",
 		ft = "markdown",
-		cond = false, -- currently not working due to a bug
+		cond = false, -- FIXME: currently not working due to a bug
 		config = function()
 			require("diagram").setup({
 				integrations = { require("diagram.integrations.markdown") },
@@ -85,22 +112,11 @@ return {
 			"ObsidianNewFromTemplate",
 			"ObsidianQuickSwitch",
 		},
-		keys = {
-			{ "<leader>oo", "<Cmd>ObsidianOpen<CR>", desc = "[O]pen note in [O]bsidian" },
-			{
-				"gf",
-				function()
-					if require("obsidian").util.cursor_on_markdown_link() then
-						return "<cmd>ObsidianFollowLink<CR>"
-					else
-						return "gf"
-					end
-				end,
-				noremap = false,
-				expr = true,
-				desc = "Follow Obsidian link",
-			},
-		},
+		keys = { {
+			"<Leader>oo",
+			"<Cmd>ObsidianOpen<CR>",
+			desc = "[o]pen note in [o]bsidian",
+		} },
 		event = { "BufReadPost " .. OBSIDIAN_VAULT .. "/*.md" },
 		---@module "obsidian"
 		---@type obsidian.config.ClientOpts
@@ -115,17 +131,10 @@ return {
 		},
 		---@diagnostic enable: missing-fields
 	},
-	{ "ellisonleao/glow.nvim", opts = {}, cmd = "Glow" },
 	{
-		"iamcco/markdown-preview.nvim",
-		build = function()
-			vim.fn["mkdp#util#install"]() -- more robust than yarn install
-		end,
-		ft = "markdown", -- cannot load lazier since the commands are not global
-		keys = {
-			{ "<C-s>", "<Plug>MarkdownPreview", desc = "Start Markdown preview" },
-			{ "<M-s>", "<Plug>MarkdownPreviewStop", desc = "Stop Markdown preview" },
-			{ "<C-p>", "<Plug>MarkdownPreviewToggle", desc = "Toggle Markdown preview" },
-		},
+		-- TODO: understand the keymaps
+		-- TODO: integrate with Blink
+		"jakewvincent/mkdnflow.nvim",
+		ft = "markdown",
 	},
 }
